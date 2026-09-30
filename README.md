@@ -1,18 +1,5 @@
-# IBScrapeSuite
-For purposes of automating collection of equity price data via IB Gateway
+# Ticker Loader
+Objective of this program is to provide a way for auxillary programs to update and maintain the CSV file of the SEC provided company_tickers.json: company_tickers.csv
 
-# dataformat:
-Uses CSV:
-date | open | high | low | close | volume | average
-data is adjusted for splits and dividends 
-not entirely sure out of which exchange it is specifically from
-
-## IKBR Limitations (note for self)
--Bars whose size is 30 seconds or less older than six months
--Expired futures data older than two years counting from the future's expiration date.
--Expired options, FOPs, warrants and structured products.
--End of Day (EOD) data for options, FOPs, warrants and structured products.
--Data for expired future spreads
--Data for securities which are no longer trading.
--Native historical data for combos. Historical data is not stored in the IB database separately for combos.; combo historical data in TWS or the API is the sum of data from the legs.
--Historical data for securities which move to a new exchange will often not be available prior to the time of the move.
+# interface
+the only exposed methoad is updateWhenNeeded(). There exists two version, one is an overload the other. updateWhenNeeded() takes as input how many days are the cutoff for the last update time. If no input is provided, the function defaults to 30 days. If the file has not been updated in more than x amount of cutoff days, or does not exist, it is updated and returns a value of 1. If the file exists and has been updated within the number of cutoff days, it returns 0. If an error occurs, say the SEC website is not responding or file gets corrupted, 2 is returned. 

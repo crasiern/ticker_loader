@@ -85,7 +85,6 @@ static size_t write_cb(char *contents, size_t size, size_t nmemb, void *stream)
     return realsize;
 }
 
-// do not run until for loop finished
 int JSONtoCSV(const char* jsonString)
 {
     // may not need const
@@ -122,7 +121,6 @@ int JSONtoCSV(const char* jsonString)
     fclose(csvFile);
 }
 
-// should probably take in date
 int needsUpdate(char* current_date)
 {
     FILE *tickerFile = fopen(filename, "r");
