@@ -6,15 +6,29 @@
 #include <cjson/cJSON.h>
 #include <time.h>
 
-#define UPDATEFREQ 40
+// Source - https://stackoverflow.com/a/230068
+// Posted by Graeme Perrow, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-09-30, License - CC BY-SA 4.0
 
-int retrieveFile(const char** jsonPointer);
+#ifdef WIN32
+#include <io.h>
+#define F_OK 0
+#define access _access
+#endif
+
+#define MAXUPDATEFREQ 40
+
+int updateWhenNeeded(char* dirPath, int cutOffDays);
+int validatePath(char* path);
+void stringifyDate(char* _date, int _year, int _month, int _day);
+int updateFile(char* filePath, char* current_date);
+int writeJSONtoString(const char** jsonString);
 static size_t write_cb(char *contents, size_t size, size_t nmemb, void *stream);
-int JSONtoCSV(const char* jsonString);
-int needsUpdate(char* current_date);
-void dateStringified(char* _date, int _year, int _month, int _day);
-int moreThanMonth(char* firstDate, char* secondDate);
-void addHeader(char* name, char* date);
+void createFileHeader(char* filePath, const char* name, char* date);
+int appendJSONtoCSV(char* filePath, const char* jsonString);
+int checkHeaderDate(char* filePath, char* current_date, int cutOffRange);
+int isOutOfCutOffRange(char* new_date, char* old_date, int cutOffRange);
+
 
 // reference https://curl.se/libcurl/c/getinmemory.html for writing sec json to string
 struct mem_chunk {
