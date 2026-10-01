@@ -5,7 +5,6 @@ static const char filename[] = "company_tickers.csv";
 
 /*
     TODO:
-    - make into pybind11 library
     - standardize error codes in defines (you pass forward CURL error codes)
 */
 

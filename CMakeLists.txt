@@ -7,11 +7,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories("C:/msys64/ucrt64/include")
 link_directories("C:/msys64/ucrt64/lib")
 
-find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
-
 # needed to force proper python3 on my system
 # NEEDS TO CHANGE
 set(Python3_EXECUTABLE "C:/Users/Michi/AppData/Local/Microsoft/WindowsApps/python3.exe")
+
+find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 
 execute_process(
     COMMAND ${Python3_EXECUTABLE} -m pybind11 --cmakedir
@@ -31,3 +31,5 @@ pybind11_add_module(ticker_loader
 )
 
 target_link_libraries(ticker_loader PRIVATE curl cjson)
+
+set_target_properties(ticker_loader PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ticker_loader")
