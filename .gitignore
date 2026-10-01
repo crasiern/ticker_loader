@@ -5,3 +5,4 @@
 !*.c
 !CMakeLists.txt
 !*.h
+!*.cpp

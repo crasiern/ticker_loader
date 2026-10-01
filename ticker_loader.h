@@ -18,6 +18,10 @@
 
 #define MAXUPDATEFREQ 40
 
+#ifdef __cplusplus
+    extern "C" {
+#endif
+
 int updateWhenNeeded(char* dirPath, int cutOffDays);
 int validatePath(char* path);
 void stringifyDate(char* _date, int _year, int _month, int _day);
@@ -35,3 +39,7 @@ struct mem_chunk {
     char *memory;
     size_t size;
 };
+
+#ifdef __cplusplus
+    }
+#endif

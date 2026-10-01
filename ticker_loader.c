@@ -9,13 +9,6 @@ static const char filename[] = "company_tickers.csv";
     - standardize error codes in defines (you pass forward CURL error codes)
 */
 
-int main()
-{
-    int status = updateWhenNeeded("X:/codeSpace/magi_project/ticker_loader/", MAXUPDATEFREQ);
-    printf("status: %d", status);
-    return 0;
-}
-
 int updateWhenNeeded(char* dirPath, int cutOffDays)
 {
     int status = 0;
